@@ -142,13 +142,14 @@
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(102, 181);
+            this.lblPrecio.Location = new System.Drawing.Point(102, 191);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(0, 13);
             this.lblPrecio.TabIndex = 11;
             // 
             // pbxImagen
             // 
+            this.pbxImagen.BackColor = System.Drawing.SystemColors.HighlightText;
             this.pbxImagen.Location = new System.Drawing.Point(313, 27);
             this.pbxImagen.Name = "pbxImagen";
             this.pbxImagen.Size = new System.Drawing.Size(217, 177);
@@ -170,6 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(561, 298);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.pbxImagen);
@@ -185,9 +187,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblCodigo);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmDetalle";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalle de Artículo";
             this.Load += new System.EventHandler(this.frmDetalle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagen)).EndInit();

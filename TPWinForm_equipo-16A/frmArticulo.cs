@@ -28,7 +28,30 @@ namespace TPWinForm_equipo_16A
 
         private void frmArticulo_Load(object sender, EventArgs e)
         {
-            if(articulo.Id != 0)
+            // Datos de prueba para Marcas
+            List<Marca> marcas = new List<Marca>();
+            marcas.Add(new Marca() { Id = 1, Descripcion = "Samsung" });
+            marcas.Add(new Marca() { Id = 2, Descripcion = "Apple" });
+            marcas.Add(new Marca() { Id = 3, Descripcion = "Sony" });
+            marcas.Add(new Marca() { Id = 4, Descripcion = "Huawei" });
+            marcas.Add(new Marca() { Id = 5, Descripcion = "Motorola" });
+
+            cboMarca.DataSource = marcas;
+            cboMarca.DisplayMember = "Descripcion";
+            cboMarca.ValueMember = "Id";
+
+            // Datos de prueba para Categorías
+            List<Categoria> categorias = new List<Categoria>();
+            categorias.Add(new Categoria() { Id = 1, Descripcion = "Celulares" });
+            categorias.Add(new Categoria() { Id = 2, Descripcion = "Televisores" });
+            categorias.Add(new Categoria() { Id = 3, Descripcion = "Media" });
+            categorias.Add(new Categoria() { Id = 4, Descripcion = "Audio" });
+
+            cboCategoria.DataSource = categorias;
+            cboCategoria.DisplayMember = "Descripcion";
+            cboCategoria.ValueMember = "Id";
+
+            if (articulo.Id != 0)
             {
                 //modificamos
                 txtCodigo.Text = articulo.Codigo;

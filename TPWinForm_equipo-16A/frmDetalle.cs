@@ -25,6 +25,8 @@ namespace TPWinForm_equipo_16A
             lblCodigo.Text = articulo.Codigo;
             lblNombre.Text = articulo.Nombre;
             lblDescripcion.Text = articulo.Descripcion;
+            lblMarca.Text = articulo.NombreMarca;
+            lblCategoria.Text = articulo.NombreCategoria;
             lblPrecio.Text = articulo.Precio.ToString();
 
             if(articulo.Imagenes.Count > 0)
