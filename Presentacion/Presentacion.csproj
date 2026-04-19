@@ -40,6 +40,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlClient" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
@@ -102,6 +103,10 @@
     <ProjectReference Include="..\Dominio\Dominio.csproj">
       <Project>{a449e1eb-91e3-4714-9823-c45ce8eb5e51}</Project>
       <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{261d9c2e-106f-41c0-a74a-f0dc51e28aec}</Project>
+      <Name>Negocio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
