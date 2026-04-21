@@ -37,5 +37,60 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void Agregar(Categoria categoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("INSERT INTO CATEGORIAS (Descripcion) VALUES (@Descripcion)");
+                datos.setearParametro("@Descripcion", categoria.Descripcion);
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void Modificar(Categoria categoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE CATEGORIAS SET Descripcion = @Descripcion WHERE Id = @Id");
+                datos.setearParametro("@Id", categoria.Id);
+                datos.setearParametro("@Descripcion", categoria.Descripcion);
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void Eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT COUNT(*) FROM ARTICULOS WHERE IdCategoria = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read() && datos.Lector.GetInt32(0) > 0)
+                {
+                    throw new Exception("No se puede eliminar la categoría porque hay artículos asociados.");
+                }
+                datos.cerrarConexion();
+
+                datos.setearConsulta("DELETE FROM CATEGORIAS WHERE Id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

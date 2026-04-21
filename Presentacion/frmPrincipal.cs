@@ -113,17 +113,40 @@ namespace TPWinForm_equipo_16A
             cargarArticulos();
         }
 
-        private void cargarArticulos()
+private void cargarArticulos()
         {
             try
             {
                 listaArticulos = negocio.Listar();
                 dgvArticulos.DataSource = listaArticulos;
+                var culture = new System.Globalization.CultureInfo("es-AR");
+                foreach (DataGridViewColumn col in dgvArticulos.Columns)
+                {
+                    if (col.Name.ToLower().Contains("precio"))
+                    {
+                        col.DefaultCellStyle.Format = "C2";
+                        col.DefaultCellStyle.FormatProvider = culture;
+                        col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    }
+                }
+                System.Windows.Forms.Application.CurrentCulture = culture;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar artículos: " + ex.Message);
             }
+        }
+
+        private void btnMarcas_Click(object sender, EventArgs e)
+        {
+            frmAdminEntidades frm = new frmAdminEntidades("Marcas");
+            frm.ShowDialog();
+        }
+
+        private void btnCategorias_Click(object sender, EventArgs e)
+        {
+            frmAdminEntidades frm = new frmAdminEntidades("Categorías");
+            frm.ShowDialog();
         }
     }
 }

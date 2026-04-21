@@ -1,4 +1,4 @@
-﻿namespace TPWinForm_equipo_16A
+namespace TPWinForm_equipo_16A
 {
     partial class frmPrincipal
     {
@@ -39,6 +39,8 @@
             this.nudMaximo = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnMarcas = new System.Windows.Forms.Button();
+            this.btnCategorias = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinimo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaximo)).BeginInit();
@@ -48,12 +50,14 @@
             // 
             this.dgvArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvArticulos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.Location = new System.Drawing.Point(43, 52);
             this.dgvArticulos.MultiSelect = false;
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.ReadOnly = true;
+            this.dgvArticulos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvArticulos.Size = new System.Drawing.Size(810, 420);
             this.dgvArticulos.TabIndex = 0;
@@ -108,14 +112,14 @@
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(124, 28);
+            this.txtBuscar.Location = new System.Drawing.Point(124, 12);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(171, 20);
             this.txtBuscar.TabIndex = 5;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(43, 26);
+            this.btnBuscar.Location = new System.Drawing.Point(43, 10);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 6;
@@ -126,7 +130,7 @@
             // nudMinimo
             // 
             this.nudMinimo.DecimalPlaces = 2;
-            this.nudMinimo.Location = new System.Drawing.Point(370, 29);
+            this.nudMinimo.Location = new System.Drawing.Point(381, 12);
             this.nudMinimo.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -139,7 +143,7 @@
             // nudMaximo
             // 
             this.nudMaximo.DecimalPlaces = 2;
-            this.nudMaximo.Location = new System.Drawing.Point(510, 29);
+            this.nudMaximo.Location = new System.Drawing.Point(541, 13);
             this.nudMaximo.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -152,20 +156,40 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(319, 31);
+            this.label1.Location = new System.Drawing.Point(311, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Mínimo:";
+            this.label1.Text = "Precio mín.:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(458, 31);
+            this.label2.Location = new System.Drawing.Point(471, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Máximo:";
+            this.label2.Text = "Precio máx.:";
+            // 
+            // btnMarcas
+            // 
+            this.btnMarcas.Location = new System.Drawing.Point(893, 330);
+            this.btnMarcas.Name = "btnMarcas";
+            this.btnMarcas.Size = new System.Drawing.Size(75, 23);
+            this.btnMarcas.TabIndex = 12;
+            this.btnMarcas.Text = "Marcas";
+            this.btnMarcas.UseVisualStyleBackColor = true;
+            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
+            // 
+            // btnCategorias
+            // 
+            this.btnCategorias.Location = new System.Drawing.Point(893, 380);
+            this.btnCategorias.Name = "btnCategorias";
+            this.btnCategorias.Size = new System.Drawing.Size(75, 23);
+            this.btnCategorias.TabIndex = 11;
+            this.btnCategorias.Text = "Categorías";
+            this.btnCategorias.UseVisualStyleBackColor = true;
+            this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
             // 
             // frmPrincipal
             // 
@@ -180,6 +204,8 @@
             this.Controls.Add(this.nudMinimo);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.btnCategorias);
+            this.Controls.Add(this.btnMarcas);
             this.Controls.Add(this.btnVerDetalle);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
@@ -205,6 +231,8 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnVerDetalle;
+        private System.Windows.Forms.Button btnMarcas;
+        private System.Windows.Forms.Button btnCategorias;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.NumericUpDown nudMinimo;

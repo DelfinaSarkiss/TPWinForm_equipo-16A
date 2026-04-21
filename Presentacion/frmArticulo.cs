@@ -18,6 +18,7 @@ namespace TPWinForm_equipo_16A
         private ArticuloNegocio articuloNegocio;
         private MarcaNegocio marcaNegocio;
         private CategoriaNegocio categoriaNegocio;
+        private bool modoEdicion = false;
 
         public frmArticulo()
         {
@@ -53,7 +54,7 @@ namespace TPWinForm_equipo_16A
 
             if (articulo.Id != 0)
             {
-                //modificamos
+                modoEdicion = true;
                 txtCodigo.Text = articulo.Codigo;
                 txtNombre.Text = articulo.Nombre;
                 txtDescripcion.Text = articulo.Descripcion;
@@ -145,13 +146,35 @@ namespace TPWinForm_equipo_16A
 
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
-            if(txtUrlImagen.Text.Length > 0)
+            if (!string.IsNullOrWhiteSpace(txtUrlImagen.Text))
             {
                 Imagen img = new Imagen();
                 img.ImagenUrl = txtUrlImagen.Text;
                 articulo.Imagenes.Add(img);
-                lstImagenes.Items.Add(img.ImagenUrl);
+                lstImagenes.Items.Add(txtUrlImagen.Text);
                 txtUrlImagen.Text = "";
+                pbxImagen.Image = null;
+            }
+            else
+            {
+                MessageBox.Show("Ingrese una URL de imagen.");
+            }
+        }
+
+        private void txtUrlImagen_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtUrlImagen.Text);
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxImagen.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+                pbxImagen.Image = null;
             }
         }
 
