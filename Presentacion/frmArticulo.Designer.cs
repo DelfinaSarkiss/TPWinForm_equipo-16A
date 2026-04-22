@@ -1,4 +1,4 @@
-﻿namespace TPWinForm_equipo_16A
+namespace TPWinForm_equipo_16A
 {
     partial class frmArticulo
     {
@@ -185,6 +185,7 @@
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(119, 20);
             this.txtUrlImagen.TabIndex = 15;
+            this.txtUrlImagen.Leave += new System.EventHandler(this.txtUrlImagen_Leave);
             // 
             // btnAgregarImagen
             // 

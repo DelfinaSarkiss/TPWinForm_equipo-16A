@@ -17,20 +17,21 @@ namespace Negocio
                 datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.Precio FROM ARTICULOS A LEFT JOIN MARCAS M ON A.IdMarca = M.Id LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id");
                 datos.ejecutarLectura();
 
-                while (datos.Lector.Read())
+while (datos.Lector.Read())
                 {
                     Articulo articulo = new Articulo
                     {
                         Id = datos.Lector.GetInt32(0),
                         Codigo = datos.Lector.GetString(1),
                         Nombre = datos.Lector.GetString(2),
-                        Descripcion = datos.Lector.GetString(3),
-                        IdMarca = datos.Lector.GetInt32(4),
-                        NombreMarca = datos.Lector.GetString(5),
-                        IdCategoria = datos.Lector.GetInt32(6),
-                        NombreCategoria = datos.Lector.GetString(7),
-                        Precio = (decimal)datos.Lector.GetDouble(8)
+                        Descripcion = datos.Lector.IsDBNull(3) ? "" : datos.Lector.GetString(3),
+                        IdMarca = datos.Lector.IsDBNull(4) ? 0 : datos.Lector.GetInt32(4),
+                        NombreMarca = datos.Lector.IsDBNull(5) ? "" : datos.Lector.GetString(5),
+                        IdCategoria = datos.Lector.IsDBNull(6) ? 0 : datos.Lector.GetInt32(6),
+                        NombreCategoria = datos.Lector.IsDBNull(7) ? "" : datos.Lector.GetString(7),
+                        Precio = datos.Lector.IsDBNull(8) ? 0 : datos.Lector.GetDecimal(8)
                     };
+                    articulo.Imagenes = CargarImagenes(articulo.Id);
                     lista.Add(articulo);
                 }
 
@@ -46,25 +47,77 @@ namespace Negocio
             }
         }
 
-        // Agregar un artículo
+// Agregar un artículo
         public void Agregar(Articulo articulo)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
+                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio); SELECT SCOPE_IDENTITY();");
                 datos.setearParametro("@Codigo", articulo.Codigo);
                 datos.setearParametro("@Nombre", articulo.Nombre);
                 datos.setearParametro("@Descripcion", articulo.Descripcion);
                 datos.setearParametro("@IdMarca", articulo.IdMarca);
                 datos.setearParametro("@IdCategoria", articulo.IdCategoria);
-                datos.setearParametro("@Precio", (double)articulo.Precio);
-                datos.ejecutarAccion();
+                datos.setearParametro("@Precio", articulo.Precio);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    articulo.Id = Convert.ToInt32(datos.Lector.GetDecimal(0));
+                }
+
+                foreach (Dominio.Imagen img in articulo.Imagenes)
+                {
+                    GuardarImagen(articulo.Id, img.ImagenUrl);
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        private List<Dominio.Imagen> CargarImagenes(int idArticulo)
+        {
+            List<Dominio.Imagen> imagenes = new List<Dominio.Imagen>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, ImagenUrl FROM IMAGENES WHERE IdArticulo = @IdArticulo");
+                datos.setearParametro("@IdArticulo", idArticulo);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Dominio.Imagen img = new Dominio.Imagen();
+                    img.Id = datos.Lector.GetInt32(0);
+                    img.ImagenUrl = datos.Lector.GetString(1);
+                    imagenes.Add(img);
+                }
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return imagenes;
+        }
+
+        private void GuardarImagen(int idArticulo, string imagenUrl)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@IdArticulo, @ImagenUrl)");
+                datos.setearParametro("@IdArticulo", idArticulo);
+                datos.setearParametro("@ImagenUrl", imagenUrl);
+                datos.ejecutarAccion();
             }
             finally
             {
@@ -86,12 +139,33 @@ namespace Negocio
                 datos.setearParametro("@Descripcion", articulo.Descripcion);
                 datos.setearParametro("@IdMarca", articulo.IdMarca);
                 datos.setearParametro("@IdCategoria", articulo.IdCategoria);
-                datos.setearParametro("@Precio", (double)articulo.Precio);
+                datos.setearParametro("@Precio", articulo.Precio);
                 datos.ejecutarAccion();
+
+                EliminarImagenes(articulo.Id);
+                foreach (Dominio.Imagen img in articulo.Imagenes)
+                {
+                    GuardarImagen(articulo.Id, img.ImagenUrl);
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        private void EliminarImagenes(int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("DELETE FROM IMAGENES WHERE IdArticulo = @IdArticulo");
+                datos.setearParametro("@IdArticulo", idArticulo);
+                datos.ejecutarAccion();
             }
             finally
             {

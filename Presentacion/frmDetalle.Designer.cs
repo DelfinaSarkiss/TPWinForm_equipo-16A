@@ -1,4 +1,4 @@
-﻿namespace TPWinForm_equipo_16A
+namespace TPWinForm_equipo_16A
 {
     partial class frmDetalle
     {
@@ -41,6 +41,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.pbxImagen = new System.Windows.Forms.PictureBox();
+            this.btnAnterior = new System.Windows.Forms.Button();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.lblImagenActual = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagen)).BeginInit();
             this.SuspendLayout();
@@ -157,6 +160,34 @@
             this.pbxImagen.TabIndex = 12;
             this.pbxImagen.TabStop = false;
             // 
+            // btnAnterior
+            // 
+            this.btnAnterior.Location = new System.Drawing.Point(313, 215);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(75, 23);
+            this.btnAnterior.TabIndex = 13;
+            this.btnAnterior.Text = "Anterior";
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
+            // lblImagenActual
+            // 
+            this.lblImagenActual.AutoSize = true;
+            this.lblImagenActual.Location = new System.Drawing.Point(400, 220);
+            this.lblImagenActual.Name = "lblImagenActual";
+            this.lblImagenActual.Size = new System.Drawing.Size(0, 13);
+            this.lblImagenActual.TabIndex = 14;
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.Location = new System.Drawing.Point(455, 215);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(75, 23);
+            this.btnSiguiente.TabIndex = 15;
+            this.btnSiguiente.Text = "Siguiente";
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
             // btnCerrar
             // 
             this.btnCerrar.Location = new System.Drawing.Point(221, 263);
@@ -173,6 +204,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(561, 298);
+            this.Controls.Add(this.btnSiguiente);
+            this.Controls.Add(this.lblImagenActual);
+            this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.pbxImagen);
             this.Controls.Add(this.lblPrecio);
@@ -213,6 +247,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.PictureBox pbxImagen;
+        private System.Windows.Forms.Button btnAnterior;
+        private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Label lblImagenActual;
         private System.Windows.Forms.Button btnCerrar;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Dominio;
+using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,15 +15,18 @@ namespace TPWinForm_equipo_16A
     public partial class frmPrincipal : Form
     {
         private List<Articulo> listaArticulos;
+        private ArticuloNegocio negocio;
         public frmPrincipal()
         {
             InitializeComponent();
+            negocio = new ArticuloNegocio();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             frmArticulo frm = new frmArticulo();
             frm.ShowDialog();
+            cargarArticulos();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -32,6 +36,7 @@ namespace TPWinForm_equipo_16A
                 Articulo seleccionado = (Articulo)dgvArticulos.SelectedRows[0].DataBoundItem;
                 frmArticulo frm = new frmArticulo(seleccionado);
                 frm.ShowDialog();
+                cargarArticulos();
             }
             else
             {
@@ -61,7 +66,17 @@ namespace TPWinForm_equipo_16A
                 DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar el artículo: " + seleccionado.Nombre + "?", "Confirmar eliminación", MessageBoxButtons.YesNo);
                 if(resultado == DialogResult.Yes)
                 {
-                    MessageBox.Show("Artículo eliminado: " + seleccionado.Nombre);
+                    try
+                    {
+                        negocio.Eliminar(seleccionado.Id);
+                        MessageBox.Show("Artículo eliminado: " + seleccionado.Nombre);
+                        listaArticulos = negocio.Listar();
+                        dgvArticulos.DataSource = listaArticulos;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al eliminar: " + ex.Message);
+                    }
                 }
             }
             else
@@ -95,16 +110,43 @@ namespace TPWinForm_equipo_16A
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            listaArticulos = new List<Articulo>();
-            Articulo a1 = new Articulo() { Id = 1, Codigo = "S01", Nombre = "Galaxy S10", Descripcion = "Una canoa cara", IdMarca = 1, IdCategoria = 1, NombreMarca = "Samsung", NombreCategoria = "Celulares", Precio = 69999 };
-            a1.Imagenes.Add(new Imagen() { ImagenUrl = "https://images.samsung.com/is/image/samsung/co-galaxy-s10-sm-g970-sm-g970fzyjcoo-frontcanaryyellow-thumb-149016542" });
-            listaArticulos.Add(a1);
-            listaArticulos.Add(new Articulo() { Id = 2, Codigo = "M03", Nombre = "Moto G Play 7ma Gen", Descripcion = "Ya siete de estos?", IdMarca = 1, IdCategoria = 5, Precio = 15699 });
-            listaArticulos.Add(new Articulo() { Id = 3, Codigo = "S99", Nombre = "Play 4", Descripcion = "Ya no se cuantas versiones hay", IdMarca = 3, IdCategoria = 3, Precio = 35000 });
-            listaArticulos.Add(new Articulo() { Id = 4, Codigo = "S56", Nombre = "Bravia 55", Descripcion = "Alta tele", IdMarca = 3, IdCategoria = 2, Precio = 49500 });
-            listaArticulos.Add(new Articulo() { Id = 5, Codigo = "A23", Nombre = "Apple TV", Descripcion = "lindo loro", IdMarca = 2, IdCategoria = 3, Precio = 7850 });
+            cargarArticulos();
+        }
 
-            dgvArticulos.DataSource = listaArticulos;
+private void cargarArticulos()
+        {
+            try
+            {
+                listaArticulos = negocio.Listar();
+                dgvArticulos.DataSource = listaArticulos;
+                var culture = new System.Globalization.CultureInfo("es-AR");
+                foreach (DataGridViewColumn col in dgvArticulos.Columns)
+                {
+                    if (col.Name.ToLower().Contains("precio"))
+                    {
+                        col.DefaultCellStyle.Format = "C2";
+                        col.DefaultCellStyle.FormatProvider = culture;
+                        col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    }
+                }
+                System.Windows.Forms.Application.CurrentCulture = culture;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar artículos: " + ex.Message);
+            }
+        }
+
+        private void btnMarcas_Click(object sender, EventArgs e)
+        {
+            frmAdminEntidades frm = new frmAdminEntidades("Marcas");
+            frm.ShowDialog();
+        }
+
+        private void btnCategorias_Click(object sender, EventArgs e)
+        {
+            frmAdminEntidades frm = new frmAdminEntidades("Categorías");
+            frm.ShowDialog();
         }
     }
 }
