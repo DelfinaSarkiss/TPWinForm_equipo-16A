@@ -13,7 +13,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, Descripcion FROM MARCAS ORDER BY Descripcion");
+                datos.setearConsulta("SELECT Id, Descripcion FROM MARCAS ORDER BY Id");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

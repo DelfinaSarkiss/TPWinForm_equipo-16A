@@ -66,12 +66,6 @@
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAdminEntidades.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAdminEntidades.Designer.cs">
-      <DependentUpon>frmAdminEntidades.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmAdminMarcas.cs">
       <SubType>Form</SubType>
     </Compile>

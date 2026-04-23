@@ -29,6 +29,10 @@ namespace TPWinForm_equipo_16A
             try
             {
                 dgvMarcas.DataSource = marcaNegocio.Listar().ToList();
+                foreach (DataGridViewColumn col in dgvMarcas.Columns)
+                {
+                    col.HeaderText = col.HeaderText.ToUpper();
+                }
             }
             catch (Exception ex)
             {
