@@ -29,6 +29,10 @@ namespace TPWinForm_equipo_16A
             try
             {
                 dgvCategorias.DataSource = categoriaNegocio.Listar().ToList();
+                foreach (DataGridViewColumn col in dgvCategorias.Columns)
+                {
+                    col.HeaderText = col.HeaderText.ToUpper();
+                }
             }
             catch (Exception ex)
             {

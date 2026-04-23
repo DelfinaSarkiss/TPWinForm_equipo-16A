@@ -122,11 +122,24 @@ private void cargarArticulos()
                 var culture = new System.Globalization.CultureInfo("es-AR");
                 foreach (DataGridViewColumn col in dgvArticulos.Columns)
                 {
+                    col.HeaderText = col.HeaderText.ToUpper();
                     if (col.Name.ToLower().Contains("precio"))
                     {
                         col.DefaultCellStyle.Format = "C2";
                         col.DefaultCellStyle.FormatProvider = culture;
                         col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    }
+                    if (col.Name == "IdMarca" || col.Name == "IdCategoria")
+                    {
+                        col.Visible = false;
+                    }
+                    if (col.Name == "NombreMarca")
+                    {
+                        col.HeaderText = "MARCA";
+                    }
+                    if (col.Name == "NombreCategoria")
+                    {
+                        col.HeaderText = "CATEGORIA";
                     }
                 }
                 System.Windows.Forms.Application.CurrentCulture = culture;
