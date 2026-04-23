@@ -1,6 +1,5 @@
 
 # Consigna TP WinForm
-Requisitos de finalización
 Se necesita una aplicación para la gestión de artículos de un catálogo de un comercio. La aplicación debe ser genérica, es decir, aplicar para cualquier tipo de comercio; y la información que en ella se cargue será consumida luego desde distintos servicios para ser mostradas ya sea en webs, e-commerces, apps mobile, revistas, etc. Esto no es parte del desarrollo, pero sí del contexto en el cual se utilizará la aplicación a desarrollar.
 Deberá ser un programa de escritorio que contemple la administración de artículos. Las funcionalidades que deberá tener la aplicación serán:
 •	Listado de artículos.
@@ -48,10 +47,11 @@ Etapa 2: Construir la interacción con la base de datos y validaciones correspon
   - Búsqueda por nombre y rango de precios (filtros en memoria)
 - `frmArticulo.cs` - Formulario ABM de artículos:
   - Datos: Código, Nombre, Descripción, Precio
-  - ComboBox: Marca (hardcodeado)
-  - ComboBox: Categoría (hardcodeado)
+  - ComboBox: Marca
+  - ComboBox: Categoría
   - Gestión de múltiples imágenes (agregar/eliminar)
 - `frmDetalle.cs` - Vista de detalle de artículo
+- `frmDetalle.cs` - Administrador Marcas y Categorías
 
 ### Base de Datos ✅
 - `sql-scripts/init.sql` - Script completo con:
@@ -87,6 +87,3 @@ docker-compose down
 ```
 
 ---
-
-## Pendiente
-- **Conectar Presentación con Negocio**: Los formularios actualmente usan datos hardcodeados en memoria. Falta reemplazar las llamadas a la lista local por los métodos de `ArticuloNegocio` para utilizar la base de datos real.
