@@ -46,6 +46,10 @@ namespace TPWinForm_equipo_16A
                 {
                     dgvEntidades.DataSource = ((CategoriaNegocio)negocio).Listar().ToList();
                 }
+
+                //ocultamos el ID y renombramos la columna de descripción
+                dgvEntidades.Columns["Id"].Visible = false;
+                dgvEntidades.Columns["Descripcion"].HeaderText = tipoEntidad == "Marcas" ? "Marcas" : "Categorías";
             }
             catch (Exception ex)
             {
@@ -91,6 +95,22 @@ namespace TPWinForm_equipo_16A
             if (string.IsNullOrWhiteSpace(descripcion))
             {
                 MessageBox.Show("Ingrese una descripción.");
+                return;
+            }
+
+            //valido duplicados
+            bool existe = false;
+            if(tipoEntidad == "Marcas") 
+            {
+                existe = ((MarcaNegocio)negocio).Listar().Any(m => m.Descripcion.ToLower() == descripcion.ToLower() && m.Id != idSeleccionado);
+            }
+            else
+            {
+                existe = ((CategoriaNegocio)negocio).Listar().Any(c => c.Descripcion.ToLower() == descripcion.ToLower() && c.Id != idSeleccionado);
+            }
+            if (existe)
+            {
+                MessageBox.Show($"Ya existe una {tipoEntidad.TrimEnd('s')} con ese nombre.");
                 return;
             }
 
