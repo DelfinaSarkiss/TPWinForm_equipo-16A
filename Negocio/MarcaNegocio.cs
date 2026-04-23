@@ -79,11 +79,13 @@ namespace Negocio
                 datos.ejecutarLectura();
                 if (datos.Lector.Read() && datos.Lector.GetInt32(0) > 0)
                 {
+                    datos.cerrarConexion();
                     throw new Exception("No se puede eliminar la marca porque hay artículos asociados.");
                 }
                 datos.cerrarConexion();
 
                 datos.setearConsulta("DELETE FROM MARCAS WHERE Id = @Id");
+                datos.limpiarParametros();
                 datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
             }

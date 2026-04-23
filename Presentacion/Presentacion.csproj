@@ -72,6 +72,18 @@
     <Compile Include="frmAdminEntidades.Designer.cs">
       <DependentUpon>frmAdminEntidades.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAdminMarcas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminMarcas.Designer.cs">
+      <DependentUpon>frmAdminMarcas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdminCategorias.Designer.cs">
+      <DependentUpon>frmAdminCategorias.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmArticulo.resx">
