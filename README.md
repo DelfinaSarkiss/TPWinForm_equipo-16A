@@ -51,7 +51,10 @@ Etapa 2: Construir la interacción con la base de datos y validaciones correspon
   - ComboBox: Categoría
   - Gestión de múltiples imágenes (agregar/eliminar)
 - `frmDetalle.cs` - Vista de detalle de artículo
-- `frmDetalle.cs` - Administrador Marcas y Categorías
+- `frmAdminEntidades.cs` - Formulario ABM de administración de Marcas y Categorías:
+  - Reutilizable para ambos tipos de entidad (se abre desde los botones "Marcas" y "Categorías" en frmPrincipal)
+  - DataGridView con listado de entidades (sin columna ID)
+  - Modos: Nuevo y Editando (indicado visualmente con label de estado)
 
 ### Base de Datos ✅
 - `sql-scripts/init.sql` - Script completo con:
