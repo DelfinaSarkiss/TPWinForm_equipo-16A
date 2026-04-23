@@ -36,6 +36,12 @@ namespace Negocio
             comando.CommandText = consulta;
         }
 
+        // Método que limpia los parámetros del comando
+        public void limpiarParametros()
+        {
+            comando.Parameters.Clear();
+        }
+
         // Método que ejecuta la consulta SQL y devuelve un SqlDataReader con los resultados
         public void ejecutarLectura()
         {

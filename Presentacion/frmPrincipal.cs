@@ -139,13 +139,13 @@ private void cargarArticulos()
 
         private void btnMarcas_Click(object sender, EventArgs e)
         {
-            frmAdminEntidades frm = new frmAdminEntidades("Marcas");
+            frmAdminMarcas frm = new frmAdminMarcas();
             frm.ShowDialog();
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)
         {
-            frmAdminEntidades frm = new frmAdminEntidades("Categorías");
+            frmAdminCategorias frm = new frmAdminCategorias();
             frm.ShowDialog();
         }
     }
