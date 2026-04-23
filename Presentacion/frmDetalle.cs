@@ -33,6 +33,17 @@ namespace TPWinForm_equipo_16A
             {
                 CargarImagen(0);
             }
+            else
+            {
+                try
+                {
+                    pbxImagen.Load("https://imgs.search.brave.com/OsmasfZOqziyJ1JmcBUDa1rUQaZT4jKmmoaGdK-DxhU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzE3Lzk5LzYyLzgy/LzM2MF9GXzE3OTk2/MjgyNzRfS3ZqOVFO/S05KUWtEYWZNbnlU/bXFLc05obXBacTZV/Q0MuanBn");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No se pudo cargar la imagen default: " + ex.Message);
+                }   
+            }
         }
 
         private void CargarImagen(int indice)
